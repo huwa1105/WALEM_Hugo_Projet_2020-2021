@@ -1,45 +1,62 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!doctype html>
+<?php
+//index public
+session_start();
+//include ('./admin/lib/php/admin_liste_include.php');
+//$cnx = Connexion::getInstance($dsn, $user, $password);
+
+?>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Index</title>
-    <link rel="stylesheet" href="css/style.css">
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <title>Site 2021</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="./admin/lib/css/style.css"/>
+    <link rel="stylesheet" href="./admin/lib/css/custom.css"/>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
+
 <body>
-<header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand text-info" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active text-info" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-info" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Mon compte
-                        </a>
-                        <ul class="dropdown-menu bg-info" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item text-light" href="#">Paramétres</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item text-light" href="#">Deconnexion</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
+<div id="page">
+    <header class="img_header">
+
+    </header>
+    <section id="colGauche">
+        <nav>
+            <?php
+            $path = "./lib/php/public_menu.php";
+            if (file_exists($path)) {
+                include($path);
+            }
+            ?>
+        </nav>
+    </section>
+    &nbsp;
+    <section id="contenu">
+        <div id="main">
+            <?php
+            if (!isset($_SESSION['page'])) {
+                $_SESSION['page'] = "accueil.php";
+            }
+            if (isset($_GET['page'])) {
+                //si on a un param page dans l'url
+                $_SESSION['page'] = $_GET['page'];
+            }
+            $path = "./pages/" . $_SESSION['page'];
+            // print "path: " . $path . "<br>";
+            if (file_exists($path)) {
+                include($path);
+            } else {
+                include("./pages/page404.php");
+            }
+            ?>
         </div>
-    </nav>
-</header>
+    </section>
+
+</div>
+&nbsp;
+<footer class="bg-dark text-danger text-center">Omniflix</footer>
 </body>
 </html>
