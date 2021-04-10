@@ -2,8 +2,8 @@
 <?php
 //index public
 session_start();
-//include ('./admin/lib/php/admin_liste_include.php');
-//$cnx = Connexion::getInstance($dsn, $user, $password);
+include ('./admin/lib/php/admin_liste_include.php');
+$cnx = Connexion::getInstance($dsn, $user, $password);
 
 ?>
 <html>
