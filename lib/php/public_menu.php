@@ -17,14 +17,12 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="./index.php?page=categorie.php">Catégories</a></li>
                         <li><a class="dropdown-item" href="./index.php?page=catalogue.php">Films</a></li>
-                        <li><a class="dropdown-item" href="./index.php?page=catalogue.php">Séries</a></li>
+                        <li><a class="dropdown-item" href="./index.php?page=series.php">Séries</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="./index.php?page=catalogue.php">Tous</a></li>
                     </ul>
                 </li>
             </ul>
             <a class="nav-link active text-light" aria-current="page" href="./index.php?page=connexion.php">Connexion</a>
-            <!--<a class="nav-link active" aria-current="page" href="./index.php?page=connexion.php"><button class="btn btn-outline-danger" type="submit">Se connecter</button></a>-->
-        </div>
     </div>
 </nav>

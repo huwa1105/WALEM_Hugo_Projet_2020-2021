@@ -13,7 +13,7 @@ $nbr_cat = count($liste_cat);
         $i < $nbr_cat;
         $i++){
         ?>
-        <a href="./index.php?page=catalogue.php">
+        <a href="./index.php?page=catalogue.php&id_cat=<?php print $liste_cat[$i]->id_cat ?>">
             <div class="col">
                 <div class="card bg-dark text-light">
                     <img src="./admin/images/<?php print $liste_cat[$i]->image ?>" class="card-img-top"

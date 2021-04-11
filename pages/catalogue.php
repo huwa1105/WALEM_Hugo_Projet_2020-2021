@@ -1,6 +1,14 @@
 <?php
 $film = new FilmBD($cnx);
-$liste_film = $film->getFilm();
+
+if(isset($_GET['id_cat'])){
+    $liste_film = $film->getFilmByCat($_GET['id_cat']);
+}
+else{
+    $liste_film = $film->getAllFilm();
+}
+
+//$liste_film = $film->getFilm();
 $nbr_film = count($liste_film);
 
 //var_dump($liste_film);
@@ -13,7 +21,7 @@ $nbr_film = count($liste_film);
         $i < $nbr_film;
         $i++){
         ?>
-        <a href="./index.php?page=catalogue.php">
+        <a href="./index.php?page=oeuvre.php&id_film=<?php print $liste_film[$i]->id_film ?>">
             <div class="col">
                 <div class="card bg-dark text-light">
                     <img src="./admin/images/<?php print $liste_film[$i]->image ?>" class="card-img-top"
