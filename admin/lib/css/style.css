@@ -33,3 +33,22 @@ footer{
 a{
     text-decoration: none;
 }
+
+.maj{
+    text-transform: capitalize;
+}
+
+.etiquette{
+    background-color: red;
+    border-radius: 2px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+#mosaique{
+    background-image: url("../../images/mosaique.jpg");
+    width: 1440px;
+    height: 500px;
+
+    box-shadow: 0 0 20px 20px #424242 inset;
+}

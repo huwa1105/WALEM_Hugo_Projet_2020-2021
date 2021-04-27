@@ -19,6 +19,9 @@
                         <li><a class="dropdown-item" href="./index.php?page=catalogue.php">Tous</a></li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./index.php?page=liste_utilisateur.php">Utilisateurs</a>
+                </li>
             </ul>
             <a class="nav-link active text-light" aria-current="page" href="./index.php?page=disconnect.php">Deconnexion</a>
         </div>

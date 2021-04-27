@@ -63,4 +63,51 @@ class FilmBD extends Film
         return $_data;
     }
 
+    public function NouvFilm($nom, $description, $realisateur, $date, $categorie, $image, $video)
+    {
+        try {
+            $this->_db->beginTransaction();
+            $query = "insert into film (id_film, nom, description, realisateur, date, categorie, image, video) values (NEXTVAL('film_id_seq'), :nom, :description, :realisateur, :date, :categorie, :image, :video)";
+            var_dump($query);
+            $_resultset = $this->_db->prepare($query);
+            $_resultset->bindvalue(':nom', $nom);
+            $_resultset->bindvalue(':description', $description);
+            $_resultset->bindvalue(':realisateur', $realisateur);
+            $_resultset->bindvalue(':date', $date);
+            $_resultset->bindvalue(':categorie', $categorie);
+            $_resultset->bindvalue(':image', $image);
+            $_resultset->bindvalue(':video', $video);
+            $_resultset->execute();
+            $this->_db->commit();
+
+        }catch (PDOException $e){
+            print $e->getMessage();
+        }
+
+    }
+
+    public function UpdateFilm($id_film, $nom, $description, $realisateur, $date, $categorie, $image, $video)
+    {
+        try {
+            $this->_db->beginTransaction();
+            $query = "update film set (nom, description, realisateur, date, categorie, image, video) values :nom, :description, :realisateur, :date, :categorie, :image, :video) where id_film = :id_film";
+            var_dump($query);
+            $_resultset = $this->_db->prepare($query);
+            $_resultset->bindvalue(':id_film', $id_film);
+            $_resultset->bindvalue(':nom', $nom);
+            $_resultset->bindvalue(':description', $description);
+            $_resultset->bindvalue(':realisateur', $realisateur);
+            $_resultset->bindvalue(':date', $date);
+            $_resultset->bindvalue(':categorie', $categorie);
+            $_resultset->bindvalue(':image', $image);
+            $_resultset->bindvalue(':video', $video);
+            $_resultset->execute();
+            $this->_db->commit();
+
+        }catch (PDOException $e){
+            print $e->getMessage();
+        }
+
+    }
+
 }

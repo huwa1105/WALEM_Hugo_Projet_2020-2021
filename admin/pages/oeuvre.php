@@ -16,8 +16,29 @@ if (isset($_SESSION['admin'])) {
                 <p class="card-text"><?php print $liste_film[0]->realisateur ?></p>
                 <p class="card-text"><?php print $liste_film[0]->date ?></p>
                 <p class="card-text"><?php print $liste_film[0]->description ?></p>
-                <a class="text-danger" href="<?php print $liste_film[0]->video ?>"><p>Regarder</p><i
-                            class="fas fa-play"></i></a>
+                <div class="container text-danger">
+                    <div class="row">
+                        <div class="col-sm">
+                            <a class="text-danger"
+                               href="<?php print $liste_film[0]->video ?>"><p>
+                                    Regarder</p><i
+                                        class="fas fa-play"></i></a>
+                        </div>
+                        <div class="col-sm">
+                            <a class="text-danger"
+                               href="./index.php?page=edit_film.php&id_film=<?php print $liste_film[0]->id_film; ?>"><p>
+                                    Editer</p><i
+                                        class="fas fa-edit text-danger"></i></a>
+                        </div>
+                        <div class="col-sm">
+                            <a class="text-danger"
+                               href="./index.php?page=edit_film.php&id_film=<?php print $liste_film[0]->id_film; ?>"><p>
+                                    Supprimer</p><i
+                                        class="fas fa-trash-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

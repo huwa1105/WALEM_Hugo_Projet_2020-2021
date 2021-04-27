@@ -22,6 +22,7 @@ $cnx = Connexion::getInstance($dsn, $user, $password);
     <link rel="stylesheet" href="./lib/css/custom.css"/>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
           integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <script src="./lib/js/fonctions_jquery.js"></script>
 </head>
 
 <body>
@@ -60,8 +61,8 @@ $cnx = Connexion::getInstance($dsn, $user, $password);
 </div>
 <footer class="bg-dark text-danger d-flex align-items-center justify-content-around">
     <?php
-    if (file_exists('lib/php/public_footer.php')) {
-        include('lib/php/public_footer.php');
+    if (file_exists('../lib/php/public_footer.php')) {
+        include('../lib/php/public_footer.php');
     }
     ?>
 </footer>
