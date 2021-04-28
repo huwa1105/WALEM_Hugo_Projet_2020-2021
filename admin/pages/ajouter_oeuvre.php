@@ -24,6 +24,7 @@ if(isset($_GET['entrer'])){
 <div class="d-flex justify-content-around text-light">
 <form action="upload.php" method="post" enctype="multipart/form-data" class="bg-dark text-light container px-5 mx-5">
     <h3 class="mt-2">Inserer une nouvelle image</h3>
+    <p>Conseillé 600x800px</p>
     <div class="form-group">
         <label for="fileToUpload">Inserer une image</label>
         <input type="file" class="form-control-file" name="fileToUpload" id="fileToUpload">
@@ -69,16 +70,6 @@ if(isset($_GET['entrer'])){
             <label for="image" class="form-label mt-2">Image</label>
             <input type="text" placeholder="Image" class="form-control" id="image" name="image">
         </div>
-        <!--<div class="container">
-            <label for="image" class="form-label mt-2">Image</label>
-            <select id="image" class="form-select">
-                <?php
-                for ($i = 0; $i < $nbr; $i++) {
-                    ?>
-                    <option><?php print $liste_film[$i]->image; ?></option>
-                <?php } ?>
-            </select>
-        </div>-->
         <div class="container">
             <button type="submit" class="btn btn-danger mb-4 mt-4" id="entrer" name="entrer">Entrer</button>
         </div>

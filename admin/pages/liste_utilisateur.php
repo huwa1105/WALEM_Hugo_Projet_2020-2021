@@ -14,6 +14,7 @@ $nbr = count($liste); //TODO Verifier si admin
             <th scope="col">Email</th>
             <th scope="col">Admin</th>
             <th scope="col" class="edit">Editer</th>
+            <th scope="col" class="delete">Supprimer</th>
         </tr>
         </thead>
         <tbody>
@@ -46,6 +47,8 @@ $nbr = count($liste); //TODO Verifier si admin
                 </td>
                 <td class="edit"><a href="./index.php?page=edit_user.php&id_user=<?php print $liste[$i]->id_user; ?>"><i
                                 class="fas fa-edit text-light"></i></a></td>
+                <td class="delete"><a href="./index.php?page=delete_user.php&id_user=<?php print $liste[$i]->id_user; ?>"><i
+                                class="fas fa-trash-alt"></i></a></td>
             </tr>
             <?php
         }

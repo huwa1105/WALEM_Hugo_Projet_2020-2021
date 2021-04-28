@@ -5,7 +5,7 @@
 -- Dumped from database version 9.6.20
 -- Dumped by pg_dump version 13.2
 
--- Started on 2021-04-11 02:25:29
+-- Started on 2021-04-27 17:14:10
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -19,20 +19,28 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 3 (class 2615 OID 2200)
--- Name: public; Type: SCHEMA; Schema: -; Owner: -
+-- TOC entry 191 (class 1255 OID 113259)
+-- Name: is_admin(text, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
-CREATE SCHEMA public;
-
-
---
--- TOC entry 2154 (class 0 OID 0)
--- Dependencies: 3
--- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON SCHEMA public IS 'standard public schema';
+CREATE FUNCTION public.is_admin(text, text) RETURNS integer
+    LANGUAGE plpgsql
+    AS '
+	declare f_login alias for $1;
+	declare f_password alias for $2;
+	declare id integer;
+	declare retour integer;
+	begin
+		select into id id_user from utilisateur where login = f_login and password = f_password;
+		if not found
+		then
+			retour = 0;
+		else
+			retour = 1;
+		end if;
+		return retour;
+	end;
+';
 
 
 SET default_tablespace = '';
@@ -67,6 +75,32 @@ CREATE TABLE public.film (
 
 
 --
+-- TOC entry 189 (class 1259 OID 113480)
+-- Name: film_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.film_id_seq
+    START WITH 21
+    INCREMENT BY 1
+    NO MINVALUE
+    MAXVALUE 999999999999
+    CACHE 1;
+
+
+--
+-- TOC entry 190 (class 1259 OID 113485)
+-- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.user_id_seq
+    START WITH 4
+    INCREMENT BY 1
+    NO MINVALUE
+    MAXVALUE 999999999999
+    CACHE 1;
+
+
+--
 -- TOC entry 187 (class 1259 OID 113084)
 -- Name: utilisateur; Type: TABLE; Schema: public; Owner: -
 --
@@ -75,9 +109,9 @@ CREATE TABLE public.utilisateur (
     id_user integer NOT NULL,
     nom text NOT NULL,
     prenom text NOT NULL,
-    mail text NOT NULL,
+    login text NOT NULL,
     password text NOT NULL,
-    admin boolean NOT NULL
+    droit_admin boolean NOT NULL
 );
 
 
@@ -102,7 +136,7 @@ CREATE VIEW public.vue_films_cat AS
 
 
 --
--- TOC entry 2146 (class 0 OID 113058)
+-- TOC entry 2151 (class 0 OID 113058)
 -- Dependencies: 185
 -- Data for Name: categorie; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -120,7 +154,7 @@ INSERT INTO public.categorie (id_cat, libelle, image) VALUES (10, 'Action', 'act
 
 
 --
--- TOC entry 2147 (class 0 OID 113075)
+-- TOC entry 2152 (class 0 OID 113075)
 -- Dependencies: 186
 -- Data for Name: film; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -245,18 +279,46 @@ Le film est présenté hors compétition lors de la Mostra de Venise 2016.
 
 Nommé dans six catégories pour les Oscars en 2017, dont meilleur film, meilleur réalisateur et meilleur acteur, le film remporte deux récompenses : l''Oscar du meilleur mixage de son et celui du meilleur montage.', 'Mel Gibson', '2016-11-09', 9, 'tunetueraspoint.jpg', 'https://www.youtube.com/watch?v=h1Jv5WdOrz8');
 INSERT INTO public.film (id_film, nom, description, realisateur, date, categorie, image, video) VALUES (20, 'Transformers - The last Knight', 'Transformers: The Last Knight ou Transformers : Le Dernier Chevalier au Québec est un film de science-fiction américain réalisé par Michael Bay, sorti en 2017, C''est le cinquième opus de la série après Transformers (2007), Transformers 2 : La Revanche (2009), Transformers 3 : La Face cachée de la Lune (2011) et Transformers : L''Âge de l''extinction (2014).', 'Michael Bay', '2017-06-28', 10, 'transformersknight.jpg', 'https://www.youtube.com/watch?v=zatCSoJwhPE');
+INSERT INTO public.film (id_film, nom, description, realisateur, date, categorie, image, video) VALUES (22, 'film 1', 'description 1', 'realisateur 1', '2021-04-15', 1, 'film1.jpg', 'https://www.youtube.com/watch?v=0RR6hU-qOns');
+INSERT INTO public.film (id_film, nom, description, realisateur, date, categorie, image, video) VALUES (23, 'Film 2', 'Description 2', 'Realisateur 2', '2002-02-02', 2, 'film2.jpg', 'Lien 2');
+INSERT INTO public.film (id_film, nom, description, realisateur, date, categorie, image, video) VALUES (24, 'Love and Monsters', 'Un jeune homme tente de survivre dans un monde post-apocalyptique envahi par des monstres. Un expert lui enseigne comment les combattre...', 'Michael Matthews', '2020-10-16', 3, 'loveandmonsters.jpg', 'https://www.youtube.com/watch?v=9yxaR9qwbwI');
+INSERT INTO public.film (id_film, nom, description, realisateur, date, categorie, image, video) VALUES (25, 'The Cloverfiled Paradox', 'The Cloverfield Paradox ou Le Paradoxe Cloverfield au Québec est un film de science-fiction horrifique américain réalisé par Julius Onah et sorti en 2018 sur Netflix. Il s’agit du troisième volet de la franchise Cloverfield, après Cloverfield (2008) et 10 Cloverfield Lane (2016).', 'Julius Onah', '2018-02-05', 4, 'thecloverfieldparadox.jpg', 'https://www.youtube.com/watch?v=jrxBaaINseI');
 
 
 --
--- TOC entry 2148 (class 0 OID 113084)
+-- TOC entry 2153 (class 0 OID 113084)
 -- Dependencies: 187
 -- Data for Name: utilisateur; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.utilisateur (id_user, nom, prenom, login, password, droit_admin) VALUES (2, 'laubry', 'cassandra', 'cassandra.laubry@condorcet.be', 'e6aaf857d96c0659162460f6913bb594', false);
+INSERT INTO public.utilisateur (id_user, nom, prenom, login, password, droit_admin) VALUES (3, 'walem', 'hugo', 'hugo.walem@gmail.com', 'e6aaf857d96c0659162460f6913bb594', true);
+INSERT INTO public.utilisateur (id_user, nom, prenom, login, password, droit_admin) VALUES (1, 'walem', 'hugo', 'hugo.walem@condorcet.be', 'e6aaf857d96c0659162460f6913bb594', false);
+INSERT INTO public.utilisateur (id_user, nom, prenom, login, password, droit_admin) VALUES (7, 'Curon', 'Mickael', 'mike.curon@icloud.com', 'e6aaf857d96c0659162460f6913bb594', false);
+INSERT INTO public.utilisateur (id_user, nom, prenom, login, password, droit_admin) VALUES (11, 'Delattre', 'Sandra', 'delsandra@hotmail.com', 'e6aaf857d96c0659162460f6913bb594', false);
+INSERT INTO public.utilisateur (id_user, nom, prenom, login, password, droit_admin) VALUES (12, 'Test', 'Test', 'test@test.com', 'e6aaf857d96c0659162460f6913bb594', false);
 
 
 --
--- TOC entry 2019 (class 2606 OID 113065)
+-- TOC entry 2161 (class 0 OID 0)
+-- Dependencies: 189
+-- Name: film_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.film_id_seq', 25, true);
+
+
+--
+-- TOC entry 2162 (class 0 OID 0)
+-- Dependencies: 190
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.user_id_seq', 12, true);
+
+
+--
+-- TOC entry 2024 (class 2606 OID 113065)
 -- Name: categorie categorie_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -265,7 +327,7 @@ ALTER TABLE ONLY public.categorie
 
 
 --
--- TOC entry 2022 (class 2606 OID 113082)
+-- TOC entry 2027 (class 2606 OID 113082)
 -- Name: film film_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -274,16 +336,16 @@ ALTER TABLE ONLY public.film
 
 
 --
--- TOC entry 2024 (class 2606 OID 113093)
+-- TOC entry 2029 (class 2606 OID 113093)
 -- Name: utilisateur utilisateur_mail_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.utilisateur
-    ADD CONSTRAINT utilisateur_mail_key UNIQUE (mail);
+    ADD CONSTRAINT utilisateur_mail_key UNIQUE (login);
 
 
 --
--- TOC entry 2026 (class 2606 OID 113091)
+-- TOC entry 2031 (class 2606 OID 113091)
 -- Name: utilisateur utilisateur_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -292,7 +354,7 @@ ALTER TABLE ONLY public.utilisateur
 
 
 --
--- TOC entry 2020 (class 1259 OID 113083)
+-- TOC entry 2025 (class 1259 OID 113083)
 -- Name: film_categorie_idx; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -300,7 +362,7 @@ CREATE INDEX film_categorie_idx ON public.film USING btree (categorie);
 
 
 --
--- TOC entry 2027 (class 2606 OID 113094)
+-- TOC entry 2032 (class 2606 OID 113094)
 -- Name: film fk_film__categorie; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -308,7 +370,7 @@ ALTER TABLE ONLY public.film
     ADD CONSTRAINT fk_film__categorie FOREIGN KEY (categorie) REFERENCES public.categorie(id_cat);
 
 
--- Completed on 2021-04-11 02:25:32
+-- Completed on 2021-04-27 17:14:14
 
 --
 -- PostgreSQL database dump complete

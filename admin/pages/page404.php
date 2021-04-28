@@ -1,1 +1,1 @@
-<h2>Page inexistante</h2>
+<h2 class="text-light">Page inexistante</h2>

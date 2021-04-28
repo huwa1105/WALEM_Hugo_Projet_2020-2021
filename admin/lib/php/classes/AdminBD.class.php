@@ -25,22 +25,23 @@ class AdminBD extends Admin
         }
     }
 
-    public  function majAdmin($id_user, $nom, $prenom, $login, $password, $droit_admin){
+    public function UpdateAdmin2($id_user, $nom, $prenom, $login, $password, $droit_admin)
+    {
         try {
+
             $this->_db->beginTransaction();
-            $query = "update utilisateur set (nom, prenom, login, password, droit_admin) values (:nom, :prenom, :login, :password, :droit_admin) where id_user = :id_user";
-            var_dump($query);
+            $query = "update utilisateur set nom=:nom,prenom=:prenom,login=:login,password=:password,droit_admin=:droit_admin where id_user=:id_user";
             $_resultset = $this->_db->prepare($query);
             $_resultset->bindvalue(':id_user', $id_user);
             $_resultset->bindvalue(':nom', $nom);
             $_resultset->bindvalue(':prenom', $prenom);
             $_resultset->bindvalue(':login', $login);
-            $_resultset->bindValue(':password', md5($password));
+            $_resultset->bindvalue(':password', md5($password));
             $_resultset->bindvalue(':droit_admin', $droit_admin);
             $_resultset->execute();
             $this->_db->commit();
-
-        }catch (PDOException $e){
+            return 1;
+        } catch (PDOException $e) {
             print $e->getMessage();
         }
     }
@@ -114,6 +115,21 @@ class AdminBD extends Admin
             print $e->getMessage();
         }
 
+    }
+
+    public function DeteteAdmin($id_user){
+        try{
+
+            $this->_db->beginTransaction();
+            $query="delete from utilisateur where id_user = :id_user";
+            $_resultset = $this->_db->prepare($query);
+            $_resultset->bindvalue(':id_user', $id_user);
+            $_resultset->execute();
+            $this->_db->commit();
+
+        }catch(PDOException $e){
+            print $e->getMessage();
+        }
     }
 
 }

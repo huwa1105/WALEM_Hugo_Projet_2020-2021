@@ -107,7 +107,7 @@ CREATE VIEW public.vue_films_cat AS
 -- Data for Name: categorie; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.categorie (id_cat, libelle, image) VALUES (1, 'Comédiee', 'comedie.jpg');
+INSERT INTO public.categorie (id_cat, libelle, image) VALUES (1, 'Comédiee', 'bienvenuechezleschtis.jpg');
 INSERT INTO public.categorie (id_cat, libelle, image) VALUES (2, 'Drame', 'drame.jpg');
 INSERT INTO public.categorie (id_cat, libelle, image) VALUES (3, 'Fantastique', 'fantastique.jpg');
 INSERT INTO public.categorie (id_cat, libelle, image) VALUES (4, 'Science-fiction', 'science-fiction.jpg');
@@ -166,7 +166,7 @@ Deuxième long métrage réalisé par l''humoriste français Dany Boon après La
 
 Bienvenue chez les Ch’tis a rencontré un immense succès auprès du public : à la surprise de ses protagonistes, il a dépassé le nombre d''entrées réalisées par La Grande Vadrouille (1966) et est alors devenu, avec 20 489 303 entrées, le meilleur résultat d''un film français au box-office national, et le deuxième au total, juste derrière Titanic (1998) et les 20 758 841 entrées de son exploitation initialen 1.
 
-En 2009, le film fut nommé au César du meilleur scénario original.', 'Dany Boon', '2008-02-27', 1, 'comedie.jpg', 'https://www.youtube.com/watch?v=OycTfchnopU');
+En 2009, le film fut nommé au César du meilleur scénario original.', 'Dany Boon', '2008-02-27', 1, 'bienvenuechezleschtis.jpg', 'https://www.youtube.com/watch?v=OycTfchnopU');
 INSERT INTO public.film (id_film, nom, description, realisateur, date, categorie, image, video) VALUES (3, 'Titanic', 'Titanic est un film dramatique américain écrit, produit et réalisé par James Cameron, sorti en 1997.
 
 Intégrant à la fois des aspects historiques et fictionnels, le film est basé sur le récit du naufrage du RMS Titanic et met en vedette Leonardo DiCaprio et Kate Winslet.

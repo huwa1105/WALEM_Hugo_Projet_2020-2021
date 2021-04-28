@@ -13,10 +13,9 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="./index.php?page=categorie.php">Catégories</a></li>
-                        <li><a class="dropdown-item" href="./index.php?page=catalogue.php">Films</a></li>
-                        <li><a class="dropdown-item" href="./index.php?page=series.php">Séries</a></li>
-                        <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="./index.php?page=catalogue.php">Tous</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="./index.php?page=ajouter_oeuvre.php">Ajouter un film</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

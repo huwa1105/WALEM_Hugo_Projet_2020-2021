@@ -89,9 +89,9 @@ class FilmBD extends Film
     public function UpdateFilm($id_film, $nom, $description, $realisateur, $date, $categorie, $image, $video)
     {
         try {
+
             $this->_db->beginTransaction();
-            $query = "update film set (nom, description, realisateur, date, categorie, image, video) values :nom, :description, :realisateur, :date, :categorie, :image, :video) where id_film = :id_film";
-            var_dump($query);
+            $query="update film set nom=:nom,description=:description,realisateur=:realisateur,date=:date,categorie=:categorie,image=:image,video=:video where id_film=:id_film";
             $_resultset = $this->_db->prepare($query);
             $_resultset->bindvalue(':id_film', $id_film);
             $_resultset->bindvalue(':nom', $nom);
@@ -103,11 +103,26 @@ class FilmBD extends Film
             $_resultset->bindvalue(':video', $video);
             $_resultset->execute();
             $this->_db->commit();
-
+            return 1;
         }catch (PDOException $e){
             print $e->getMessage();
         }
 
+    }
+
+    public function DeteteFilm($id_film){
+        try{
+
+            $this->_db->beginTransaction();
+            $query="delete from film where id_film = :id_film";
+            $_resultset = $this->_db->prepare($query);
+            $_resultset->bindvalue(':id_film', $id_film);
+            $_resultset->execute();
+            $this->_db->commit();
+
+        }catch(PDOException $e){
+            print $e->getMessage();
+        }
     }
 
 }

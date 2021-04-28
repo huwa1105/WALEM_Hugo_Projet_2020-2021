@@ -32,7 +32,7 @@ if (isset($_SESSION['admin'])) {
                         </div>
                         <div class="col-sm">
                             <a class="text-danger"
-                               href="./index.php?page=edit_film.php&id_film=<?php print $liste_film[0]->id_film; ?>"><p>
+                               href="./index.php?page=delete_film.php&id_film=<?php print $liste_film[0]->id_film; ?>"><p>
                                     Supprimer</p><i
                                         class="fas fa-trash-alt"></i></a>
                         </div>
