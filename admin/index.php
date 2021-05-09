@@ -2,8 +2,15 @@
 <?php
 //index admin
 session_start();
-include ('./lib/php/admin_liste_include.php');
+include('./lib/php/admin_liste_include.php');
 $cnx = Connexion::getInstance($dsn, $user, $password);
+
+if (!isset($_SESSION['nom_user'])) {
+    $_SESSION['nom_user'] = $_GET['nom_user'];
+    $_SESSION['prenom_user'] = $_GET['prenom_user'];
+    $_SESSION['droit_user'] = $_GET['droit_user'];
+    $_SESSION['id_user'] = $_GET['id_user'];
+}
 
 ?>
 <html>
@@ -38,9 +45,9 @@ $cnx = Connexion::getInstance($dsn, $user, $password);
 </header>
 <div id="page" class="py-5">
     <?php
-    if(isset($_SESSION['page']) && !isset($_SESSION['partie_admin'])){
+    if (isset($_SESSION['page']) && !isset($_SESSION['partie_admin'])) {
         unset($_SESSION['page']);
-        $_SESSION['partie_admin']=1;
+        $_SESSION['partie_admin'] = 1;
     }
     if (!isset($_SESSION['page'])) {
         $_SESSION['page'] = "accueil_admin.php";

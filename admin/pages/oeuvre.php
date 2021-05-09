@@ -24,6 +24,8 @@ if (isset($_SESSION['admin'])) {
                                     Regarder</p><i
                                         class="fas fa-play"></i></a>
                         </div>
+                        <?php
+                        if($_SESSION['droit_user'] == 1){ ?>
                         <div class="col-sm">
                             <a class="text-danger"
                                href="./index.php?page=edit_film.php&id_film=<?php print $liste_film[0]->id_film; ?>"><p>
@@ -36,6 +38,7 @@ if (isset($_SESSION['admin'])) {
                                     Supprimer</p><i
                                         class="fas fa-trash-alt"></i></a>
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
 

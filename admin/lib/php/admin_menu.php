@@ -18,10 +18,24 @@
                         <li><a class="dropdown-item" href="./index.php?page=ajouter_oeuvre.php">Ajouter un film</a></li>
                     </ul>
                 </li>
+                <?php
+                if($_SESSION['droit_user'] == 1){
+                ?>
                 <li class="nav-item">
                     <a class="nav-link" href="./index.php?page=liste_utilisateur.php">Utilisateurs</a>
                 </li>
+                <?php
+                }
+                ?>
+                <a class="nav-link dropdown-toggle maj" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <?php print $_SESSION['nom_user']; print" "; print $_SESSION['prenom_user']?>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="./index.php?page=account.php">Mon compte</a></li><!--TODO Page "mon compte"-->
+                    <li><a class="dropdown-item" href="./index.php?page=disconnect.php">Deconnexion</a></li>
+                </ul>
             </ul>
-            <a class="nav-link active text-light" aria-current="page" href="./index.php?page=disconnect.php">Deconnexion</a>
+
+            <!--<a class="nav-link active text-light" aria-current="page" href="./index.php?page=disconnect.php"><?php print $nom_user; print $prenom_user?></a>-->
         </div>
 </nav>

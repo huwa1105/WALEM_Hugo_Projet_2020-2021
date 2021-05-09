@@ -47,8 +47,8 @@ a{
 
 #mosaique{
     background-image: url("../../images/mosaique.jpg");
-    width: 1440px;
-    height: 500px;
+    width: 1920px;
+    height: 689px;
 
     box-shadow: 0 0 20px 20px #424242 inset;
 }

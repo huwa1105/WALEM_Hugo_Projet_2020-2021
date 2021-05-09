@@ -3,6 +3,7 @@ include('./lib/php/verifier_connexion.php');
 $user = new AdminBD($cnx);
 $liste = $user->getAllAdmin();
 $nbr = count($liste); //TODO Verifier si admin
+if ($_SESSION['droit_user'] == 1){
 ?>
 <div class="container">
     <table class="table text-light">
@@ -19,6 +20,7 @@ $nbr = count($liste); //TODO Verifier si admin
         </thead>
         <tbody>
         <?php
+
         for ($i = 0; $i < $nbr; $i++) {
             ?>
             <tr>
@@ -47,9 +49,15 @@ $nbr = count($liste); //TODO Verifier si admin
                 </td>
                 <td class="edit"><a href="./index.php?page=edit_user.php&id_user=<?php print $liste[$i]->id_user; ?>"><i
                                 class="fas fa-edit text-light"></i></a></td>
-                <td class="delete"><a href="./index.php?page=delete_user.php&id_user=<?php print $liste[$i]->id_user; ?>"><i
-                                class="fas fa-trash-alt"></i></a></td>
+                <td class="delete"><a
+                            href="./index.php?page=delete_user.php&id_user=<?php print $liste[$i]->id_user; ?>"><i
+                                class="fas fa-trash-alt text-light"></i></a></td>
             </tr>
+            <?php
+        }
+        } else {
+            ?>
+            <h2 class="text-light">Accès réservés aux adminsitrateurs</h2>
             <?php
         }
         ?>

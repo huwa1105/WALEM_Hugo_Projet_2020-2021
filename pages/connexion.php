@@ -3,30 +3,39 @@ if (isset($_POST['submit'])) {
     extract($_POST, EXTR_OVERWRITE);
     $ad = new AdminBD($cnx);
     $admin = $ad->getAdmin($login, $password);
-    //$nbr = count($admin);
+    $admin2 = $ad->getAdminBylogin($login);
+    $id_user = $admin2[0]->id_user;
+    $nom_user = $admin2[0]->nom;
+    $prenom_user = $admin2[0]->prenom;
+    $droit_user = $admin2[0]->droit_admin;
     if ($admin) {
         $_SESSION['admin'] = 1;
+        //var_dump($nom_user);
+        //var_dump($prenom_user);
+        //var_dump($droit_user);
+        //var_dump($id_user);
         print "OK";
-        //if (!is_null($admin)) {
-            //$_SESSION['login'] = $_POST['login'];
-            //$_SESSION['password'] = $_POST['password'];
-        //}
+        if (!is_null($admin)) {
+            $_SESSION['login'] = $_POST['login'];
+            $_SESSION['password'] = $_POST['password'];
+        }
         ?>
-        <meta http-equiv="refresh" : content="0;URL=./admin/index.php?page=accueil_admin.php">
+        <meta http-equiv="refresh" :
+              content="0;URL=./admin/index.php?page=accueil_admin.php&id_user=<?php print $id_user ?>&nom_user=<?php print $nom_user ?>&prenom_user=<?php print $prenom_user ?>&droit_user=<?php print $droit_user ?>">
         <?php
     } else {
         $message = "Identifiants incorrects";
     }
 }
 
-if(isset($_GET['register'])){
+if (isset($_GET['register'])) {
     extract($_GET, EXTR_OVERWRITE);
     $add = new AdminBD($cnx);
     $us = $add->ajoutAdmin($nom, $prenom, $login, $password, $droit_admin);
 
-    if (!is_null($us)){
+    if (!is_null($us)) {
         unset($_SESSION['page']);
-    }else{
+    } else {
         print "<meta http-equiv=\"refresh\": Content=\"0;URL=index.php\">";
     }
 
@@ -58,15 +67,16 @@ if(isset($_GET['register'])){
             <button type="submit" class="btn btn-danger mb-4 mt-4" name="submit">Connexion</button>
         </div>
         <p class=""><?php
-            if (isset($message)){
-            print $message;
+            if (isset($message)) {
+                print $message;
             }
             ?>
         </p>
     </form>
 
 
-    <form class="bg-dark text-light container px-5 mx-5" action="<?php print $_SERVER['PHP_SELF']; ?>" method="get"> <!--TODO formulaire d'inscription-->
+    <form class="bg-dark text-light container px-5 mx-5" action="<?php print $_SERVER['PHP_SELF']; ?>" method="get">
+        <!--TODO formulaire d'inscription-->
         <h2 class="mt-2">Inscription</h2>
         <div class="container">
             <label for="exampleInputEmail1" class="form-label mt-2">Nom</label>

@@ -14,13 +14,14 @@ class AdminBD extends Admin
 
     }
 
-    public function updateAdmin($champ,$id,$valeur){
-        try{
+    public function updateAdmin($champ, $id, $valeur)
+    {
+        try {
             //appeler une procédure embarquée
-            $query = "update utilisateur set ".$champ."='".$valeur."' where id_user='".$id."'";
+            $query = "update utilisateur set " . $champ . "='" . $valeur . "' where id_user='" . $id . "'";
             $resultset = $this->_db->prepare($query); //TODO transformer la requête!
             $resultset->execute();
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             print $e->getMessage();
         }
     }
@@ -57,8 +58,8 @@ class AdminBD extends Admin
             $_resultset->execute();
             $retour = $_resultset->fetchColumn(0);
             return $retour;
-        }catch(PDOException $e){
-            print "Echec ".$e->getMessage();
+        } catch (PDOException $e) {
+            print "Echec " . $e->getMessage();
         }
 
     }
@@ -96,6 +97,22 @@ class AdminBD extends Admin
         return $_data;
     }
 
+    public function getAdminBylogin($login)
+    {
+        try {
+            $query = "select * from utilisateur where login = :login";
+            $_resultset = $this->_db->prepare($query);
+            $_resultset->bindValue(':login', $login);
+            $_resultset->execute();
+            while ($d = $_resultset->fetch()) {
+                $_data[] = new Admin($d);
+            }
+        } catch (PDOException $e) {
+            print "Echec de la requête" . $e->getMessage();
+        }
+        return $_data;
+    }
+
     public function ajoutAdmin($nom, $prenom, $login, $password, $droit_admin)
     {
         try {
@@ -111,23 +128,24 @@ class AdminBD extends Admin
             $_resultset->execute();
             $this->_db->commit();
 
-        }catch (PDOException $e){
+        } catch (PDOException $e) {
             print $e->getMessage();
         }
 
     }
 
-    public function DeteteAdmin($id_user){
-        try{
+    public function DeteteAdmin($id_user)
+    {
+        try {
 
             $this->_db->beginTransaction();
-            $query="delete from utilisateur where id_user = :id_user";
+            $query = "delete from utilisateur where id_user = :id_user";
             $_resultset = $this->_db->prepare($query);
             $_resultset->bindvalue(':id_user', $id_user);
             $_resultset->execute();
             $this->_db->commit();
 
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             print $e->getMessage();
         }
     }
