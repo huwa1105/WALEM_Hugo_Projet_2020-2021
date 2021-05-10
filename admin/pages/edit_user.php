@@ -10,7 +10,7 @@ if ($_SESSION['droit_user'] == 1) {
                 $liste_admin = $ad->getAdminById($_GET['id_user']);
             }
 
-        }//TODO formulaire de modification
+        }
 
         if (isset($_GET['entrer'])) {
             extract($_GET, EXTR_OVERWRITE);

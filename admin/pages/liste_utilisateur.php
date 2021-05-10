@@ -2,7 +2,7 @@
 include('./lib/php/verifier_connexion.php');
 $user = new AdminBD($cnx);
 $liste = $user->getAllAdmin();
-$nbr = count($liste); //TODO Verifier si admin
+$nbr = count($liste);
 if ($_SESSION['droit_user'] == 1){
 ?>
 <div class="container">

@@ -16,6 +16,7 @@
                         <li><a class="dropdown-item" href="./index.php?page=catalogue.php">Tous</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="./index.php?page=ajouter_oeuvre.php">Ajouter un film</a></li>
+                        <li><a class="dropdown-item" href="./index.php?page=pdffilm.php">Imprimer PDF</a></li>
                     </ul>
                 </li>
                 <?php
@@ -31,7 +32,6 @@
                     <?php print $_SESSION['nom_user']; print" "; print $_SESSION['prenom_user']?>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="./index.php?page=account.php">Mon compte</a></li><!--TODO Page "mon compte"-->
                     <li><a class="dropdown-item" href="./index.php?page=disconnect.php">Deconnexion</a></li>
                 </ul>
             </ul>

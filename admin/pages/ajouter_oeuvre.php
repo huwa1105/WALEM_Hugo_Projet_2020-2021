@@ -2,7 +2,7 @@
 include('./lib/php/verifier_connexion.php');
 $film = new FilmBD($cnx);
 $liste_film = $film->getAllFilm();
-$nbr = count($liste_film); //TODO Verifier si admin
+$nbr = count($liste_film);
 
 $categorie = new CategorieBD($cnx);
 $liste_cat = $categorie->getCategorie();
@@ -11,7 +11,7 @@ $nbr = count($liste_cat);
 if(isset($_GET['entrer'])){
     extract($_GET, EXTR_OVERWRITE);
     $add = new FilmBD($cnx);
-    $film = $add->NouvFilm($nom, $description, $realisateur, $date, $categorie, $image, $video);//TODO chnager catégorie
+    $film = $add->NouvFilm($nom, $description, $realisateur, $date, $categorie, $image, $video);
 
     if (!is_null($film)){
         unset($_SESSION['page']);

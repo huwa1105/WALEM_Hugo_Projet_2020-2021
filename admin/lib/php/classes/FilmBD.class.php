@@ -68,7 +68,6 @@ class FilmBD extends Film
         try {
             $this->_db->beginTransaction();
             $query = "insert into film (id_film, nom, description, realisateur, date, categorie, image, video) values (NEXTVAL('film_id_seq'), :nom, :description, :realisateur, :date, :categorie, :image, :video)";
-            var_dump($query);
             $_resultset = $this->_db->prepare($query);
             $_resultset->bindvalue(':nom', $nom);
             $_resultset->bindvalue(':description', $description);

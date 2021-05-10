@@ -76,7 +76,6 @@ if (isset($_GET['register'])) {
 
 
     <form class="bg-dark text-light container px-5 mx-5" action="<?php print $_SERVER['PHP_SELF']; ?>" method="get">
-        <!--TODO formulaire d'inscription-->
         <h2 class="mt-2">Inscription</h2>
         <div class="container">
             <label for="exampleInputEmail1" class="form-label mt-2">Nom</label>

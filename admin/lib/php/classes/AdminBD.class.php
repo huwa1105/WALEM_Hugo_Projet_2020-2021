@@ -19,7 +19,7 @@ class AdminBD extends Admin
         try {
             //appeler une procédure embarquée
             $query = "update utilisateur set " . $champ . "='" . $valeur . "' where id_user='" . $id . "'";
-            $resultset = $this->_db->prepare($query); //TODO transformer la requête!
+            $resultset = $this->_db->prepare($query);
             $resultset->execute();
         } catch (PDOException $e) {
             print $e->getMessage();
